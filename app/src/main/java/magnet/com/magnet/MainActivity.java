@@ -1,16 +1,9 @@
 package magnet.com.magnet;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -31,10 +24,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        findViewById(R.id.buttonCreateWidget).setOnClickListener(this);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            startService(new Intent(MainActivity.this, MyService.class));
+            startService(new Intent(MainActivity.this, FloatIconService.class));
             finish();
         } else if (Settings.canDrawOverlays(this)) {
-            startService(new Intent(MainActivity.this, MyService.class));
+            startService(new Intent(MainActivity.this, FloatIconService.class));
             finish();
         } else {
             askPermission();
@@ -54,10 +47,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            startService(new Intent(MainActivity.this, MyService.class));
+            startService(new Intent(MainActivity.this, FloatIconService.class));
             finish();
         } else if (Settings.canDrawOverlays(this)) {
-            startService(new Intent(MainActivity.this, MyService.class));
+            startService(new Intent(MainActivity.this, FloatIconService.class));
             finish();
         } else {
             askPermission();

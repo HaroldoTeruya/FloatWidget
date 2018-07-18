@@ -31,8 +31,8 @@ import magnet.com.magnet.backboard.imitator.InertialImitator;
 import magnet.com.magnet.backboard.performer.Performer;
 
 /**
- * Created by prem on 7/20/14.
- * Class that holds the Magnet icon, and performs touchEvents on the view.
+ *
+ *
  */
 public class Magnet
         implements View.OnTouchListener, View.OnClickListener, ViewTreeObserver.OnGlobalLayoutListener,
