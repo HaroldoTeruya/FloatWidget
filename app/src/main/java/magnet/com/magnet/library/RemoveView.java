@@ -22,11 +22,11 @@ public class RemoveView {
   protected View shadow;
   protected ImageView buttonImage;
   protected  WindowManager windowManager;
-  protected  SimpleAnimator showAnim;
-  protected  SimpleAnimator hideAnim;
+  protected Animator showAnim;
+  protected Animator hideAnim;
 
-  protected  SimpleAnimator shadowFadeOut;
-  protected  SimpleAnimator shadowFadeIn;
+  protected Animator shadowFadeOut;
+  protected Animator shadowFadeIn;
 
   protected  final int buttonBottomPadding;
 
@@ -41,10 +41,10 @@ public class RemoveView {
     buttonBottomPadding = button.getPaddingBottom();
     shadow = layout.findViewById(R.id.shadow);
     windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-    showAnim = new SimpleAnimator(button, R.anim.slide_up);
-    hideAnim = new SimpleAnimator(button, R.anim.slide_down);
-    shadowFadeIn = new SimpleAnimator(shadow, android.R.anim.fade_in);
-    shadowFadeOut = new SimpleAnimator(shadow, android.R.anim.fade_out);
+    showAnim = new Animator(button, R.anim.slide_up);
+    hideAnim = new Animator(button, R.anim.slide_down);
+    shadowFadeIn = new Animator(shadow, android.R.anim.fade_in);
+    shadowFadeOut = new Animator(shadow, android.R.anim.fade_out);
   }
 
   protected void setIconResId(int id) {

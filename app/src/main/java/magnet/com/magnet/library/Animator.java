@@ -8,15 +8,14 @@ import android.view.animation.AnimationUtils;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by prem on 7/20/14.
  * A class that takes care of animating a view in a simple way.
  */
-public class SimpleAnimator
+public class Animator
 {
     protected WeakReference<View> viewRef;
     protected int animation;
 
-    protected SimpleAnimator(View view, int anim)
+    protected Animator(View view, int anim)
     {
         this.animation = anim;
         this.viewRef = new WeakReference<>(view);

@@ -12,12 +12,11 @@ import android.widget.Toast;
 import magnet.com.magnet.library.IconCallback;
 import magnet.com.magnet.library.Magnet;
 
-class FloatIconService extends Service implements IconCallback
-{
+public class FloatIconService extends Service implements IconCallback {
     // GLOBAL VARIABLES ============================================================================
     // =============================================================================================
 
-    private static final String TAG = "FloatIcon";
+    private static final String TAG = "FloatWidget";
     private Magnet magnet;
 
     // METHODS =====================================================================================
@@ -25,24 +24,34 @@ class FloatIconService extends Service implements IconCallback
 
     @Nullable
     @Override
-    public IBinder onBind(Intent intent)
-    {
+    public IBinder onBind(Intent intent) {
+
         return null;
     }
 
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
+
         super.onCreate();
 
         Log.d(TAG, "onCreate");
         this.startMagnet();
     }
 
-    void destroy()
-    {
-        if (magnet != null)
-        {
+    /**
+     * This event can be called from the "stopService"
+     */
+    @Override
+    public void onDestroy() {
+
+        Log.d(TAG, "FloatIconService onDestroy");
+        this.destroy();
+        super.onDestroy();
+    }
+
+    void destroy() {
+
+        if (magnet != null) {
             magnet.destroy();
         }
         this.stopSelf();
@@ -52,10 +61,9 @@ class FloatIconService extends Service implements IconCallback
      * This method instantiate the magnet object.
      * See {@link Magnet}
      */
-    public void startMagnet()
-    {
-        if (magnet == null)
-        {
+    public void startMagnet() {
+
+        if (magnet == null) {
             magnet = Magnet.newBuilder(FloatIconService.this)
                     .setIconView(R.layout.logo_float_layout)
                     .setIconCallback(this)
@@ -78,9 +86,8 @@ class FloatIconService extends Service implements IconCallback
      * @param y y coordinate on the screen in pixels
      */
     @Override
-    public void onMove(float x, float y)
-    {
-        Log.i(TAG, "onMove(" + x + "," + y + ")");
+    public void onMove(float x, float y) {
+//        Log.i(TAG, "onMove(" + x + "," + y + ")");
     }
 
     /**
@@ -88,20 +95,25 @@ class FloatIconService extends Service implements IconCallback
      * This method open the "com.fw2" application.
      *
      * @param icon the view holding the icon. Get context from this view
-     * @param x current icon position
-     * @param y current icon position
+     * @param x    current icon position
+     * @param y    current icon position
      */
     @Override
-    public void onIconClick(View icon, float x, float y)
-    {
+    public void onIconClick(View icon, float x, float y) {
+
         Log.i(TAG, "onIconClick");
         Toast.makeText(FloatIconService.this, "GO GO GO!", Toast.LENGTH_SHORT).show();
 
-        PackageManager packageManager = FloatIconService.this.getPackageManager();
-        Intent launchIntent = packageManager.getLaunchIntentForPackage("magnet.com.magnet");
-        FloatIconService.this.startActivity(launchIntent);
+        Intent intent = new Intent();
+        intent.setAction("FloatWidget");
+        intent.putExtra("DATAPASSED", 696969696);
+        FloatIconService.this.sendBroadcast(intent);
 
-        FloatIconService.this.destroy();
+//        PackageManager packageManager = FloatIconService.this.getPackageManager();
+//        Intent launchIntent = packageManager.getLaunchIntentForPackage("magnet.com.magnet");
+//        FloatIconService.this.startActivity(launchIntent);
+
+//        FloatIconService.this.destroy();
     }
 
     /**
@@ -109,11 +121,10 @@ class FloatIconService extends Service implements IconCallback
      * This method destroy the icon.
      */
     @Override
-    public void onFlingAway()
-    {
+    public void onFlingAway() {
+
         Log.i(TAG, "onFlingAway");
-        if (magnet != null)
-        {
+        if (magnet != null) {
             magnet.destroy();
             magnet = null;
         }
@@ -124,8 +135,8 @@ class FloatIconService extends Service implements IconCallback
      * This method finish the service.
      */
     @Override
-    public void onIconDestroyed()
-    {
+    public void onIconDestroyed() {
+
         Log.i(TAG, "onIconDestroyed()");
         this.stopSelf();
     }

@@ -3,7 +3,6 @@ package magnet.com.magnet.library;
 import android.view.View;
 
 /**
- * Created by prem on 7/20/14.
  * Interface that gives the user callbacks for when the MagnetIcon has been interacted with.
  */
 public interface IconCallback {
