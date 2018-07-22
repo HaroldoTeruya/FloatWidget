@@ -42,16 +42,15 @@ public class MainActivity extends AppCompatActivity {
 
                 if (intent != null) {
                     Log.d(TAG, "MainActivity onCreate onReceive");
-                    int datapassed = intent.getIntExtra("DATAPASSED", 0);
-                    Toast.makeText(MainActivity.this,
-                            "Triggered by Service!\n"
-                                    + "Data passed: " + String.valueOf(datapassed),
-                            Toast.LENGTH_LONG).show();
+
+                    Intent messageIntent = new Intent(MainActivity.this, FloatIconService.class);
+                    messageIntent.putExtra("go", "go");
+                    MainActivity.this.startService(messageIntent);
                 }
             }
         };
-
-        start(broadcastReceiver, intentFilter);
+        registerReceiver(broadcastReceiver, intentFilter);
+        start();
     }
 
     @Override
@@ -68,10 +67,9 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, SYSTEM_ALERT_WINDOW_PERMISSION);
     }
 
-    public void start(BroadcastReceiver broadcastReceiver, IntentFilter intentFilter) {
+    public void start() {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(this)) {
-            MainActivity.this.registerReceiver(broadcastReceiver, intentFilter);
             startService(new Intent(MainActivity.this, FloatIconService.class));
         } else {
             askPermission();

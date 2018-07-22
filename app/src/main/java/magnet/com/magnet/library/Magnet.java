@@ -45,6 +45,10 @@ public class Magnet
         return new MagnetBuilder(context);
     }
 
+    public void add() {
+
+    }
+
     private static class MagnetBuilder extends Builder<Magnet> {
 
         MagnetBuilder(Context context) {
@@ -430,7 +434,7 @@ public class Magnet
     public void show() {
 
         Log.d(TAG, "show: ");
-        
+
         addToWindow();
         iconView.setOnClickListener(this);
         initializeMotionPhysics();

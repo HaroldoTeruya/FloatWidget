@@ -2,7 +2,6 @@ package magnet.com.magnet;
 
 import android.app.Service;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -12,7 +11,8 @@ import android.widget.Toast;
 import magnet.com.magnet.library.IconCallback;
 import magnet.com.magnet.library.Magnet;
 
-public class FloatIconService extends Service implements IconCallback {
+public class FloatIconService extends Service implements IconCallback
+{
     // GLOBAL VARIABLES ============================================================================
     // =============================================================================================
 
@@ -27,6 +27,16 @@ public class FloatIconService extends Service implements IconCallback {
     public IBinder onBind(Intent intent) {
 
         return null;
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        Log.d(TAG, "onStartCommand: " + intent.getStringExtra("go"));
+        if (intent.hasExtra("go")) {
+            magnet.add();
+        }
+        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
