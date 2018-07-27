@@ -595,21 +595,16 @@ public class Magnet implements
 
         Log.d(TAG, "Magnet goToWall");
         try {
-            if (shouldStickToWall && !isGoingToWall) {
+            if (shouldStickToWall && !isGoingToWall && isToMove) {
                 isGoingToWall = true;
                 iconView.getLocationOnScreen(iconPosition);
                 boolean endX = iconPosition[0] > getResource().getDisplayMetrics().widthPixels / 2;
                 float nearestXWall = endX ? xMaxValue : xMinValue;
                 actor.removeAllListeners();
                 xSpring.setVelocity(iconPosition[0] > nearestXWall ? -goToWallVelocity : goToWallVelocity);
-                if (isToMove) {
-                    xSpring.setEndValue(nearestXWall);
-                } else {
-
-
-                }
+                xSpring.setEndValue(nearestXWall);
+                actor.addAllListeners();
             }
-            actor.addAllListeners();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -765,13 +760,11 @@ public class Magnet implements
     @Override
     public void onClick(View view) {
 
-        if (distance > 20) {
-            xSpring.setAtRest();
-            ySpring.setAtRest();
-            view.getLocationOnScreen(iconPosition);
-            if (iconCallback != null) {
-                iconCallback.onIconClick(view, iconPosition[0], iconPosition[1]);
-            }
+        xSpring.setAtRest();
+        ySpring.setAtRest();
+        view.getLocationOnScreen(iconPosition);
+        if (iconCallback != null) {
+            iconCallback.onIconClick(view, iconPosition[0], iconPosition[1]);
         }
     }
 
