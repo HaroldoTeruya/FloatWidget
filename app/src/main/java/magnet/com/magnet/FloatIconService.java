@@ -34,9 +34,9 @@ public class FloatIconService extends Service implements IconCallback
 
         Log.d(TAG, "onStartCommand: " + intent.getStringExtra("go"));
         if (intent.hasExtra("go")) {
-            magnet.add();
+//            magnet.onUnreadMessageReceived();
         }
-        return super.onStartCommand(intent, flags, startId);
+        return START_NOT_STICKY;
     }
 
     @Override
@@ -77,7 +77,6 @@ public class FloatIconService extends Service implements IconCallback
             magnet = Magnet.newBuilder(FloatIconService.this)
                     .setIconView(R.layout.logo_float_layout)
                     .setIconCallback(this)
-                    .setHideFactor(0.2f)
                     .setShouldShowRemoveView(true)
                     .setRemoveIconResId(R.drawable.ic_close)
                     .setRemoveIconShadow(R.drawable.bottom_shadow)

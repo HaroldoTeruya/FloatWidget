@@ -17,12 +17,10 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:animateLayoutChanges="true"
+                android:id="@+id/icon_imageview"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="8dp"
@@ -31,17 +29,18 @@
                 android:src="@drawable/logo_negative_symbol" />
 
             <TextView
-                android:animateLayoutChanges="true"
-                android:id="@+id/badge_notification_1"
+
+                android:id="@+id/badge_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:background="@android:drawable/ic_notification_overlay"
-                android:text="204"
+                android:text="+42"
                 android:textAlignment="center"
                 android:textColor="#FFF"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="visible" />
         </RelativeLayout>
     </RelativeLayout>
 </FrameLayout>

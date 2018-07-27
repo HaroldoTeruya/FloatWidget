@@ -21,8 +21,8 @@ import magnet.com.magnet.backboard.imitator.MotionImitator;
 import magnet.com.magnet.backboard.performer.Performer;
 
 /**
- * Coordinates the relationship between {@link com.tumblr.backboard.imitator.MotionImitator}s,
- * {@link Spring}s, and {@link com.tumblr.backboard.performer.Performer}s on a
+ * Coordinates the relationship between {@link MotionImitator}s,
+ * {@link Spring}s, and {@link Performer}s on a
  * single {@link View}.
  * <p>
  * This primarily exists to manage the {@link View.OnTouchListener} on the

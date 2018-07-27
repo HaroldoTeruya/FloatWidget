@@ -97,7 +97,7 @@ public abstract class EventImitator extends Imitator {
 	}
 
 	/**
-	 * Called by a {@link com.tumblr.backboard.imitator.MotionImitator} (or another {@link
+	 * Called by a {@link MotionImitator} (or another {@link
 	 * View.OnTouchListener}) when a {@link MotionEvent} occurs.
 	 *
 	 * @param offset
@@ -112,23 +112,21 @@ public abstract class EventImitator extends Imitator {
 	protected void imitate(final float offset, final float value, final float delta, @Nullable final MotionEvent event) {
 		if (event != null) {
 			switch (event.getAction()) {
-			case MotionEvent.ACTION_DOWN:
-				constrain(event);
+				case MotionEvent.ACTION_DOWN:
+					constrain(event);
 
-			case MotionEvent.ACTION_MOVE:
-				if (event.getHistorySize() > 0) {
-					mime(offset, value, delta,
-							event.getEventTime() - event.getHistoricalEventTime(0), event);
-				} else {
-					mime(offset, value, delta, 0, event);
-				}
+				case MotionEvent.ACTION_MOVE:
+					if (event.getHistorySize() > 0) {
+						mime(offset, value, delta, event.getEventTime() - event.getHistoricalEventTime(0), event);
+					} else {
+						mime(offset, value, delta, 0, event);
+					}
 
-				break;
-			default:
-			case MotionEvent.ACTION_UP:
-				release(event);
-
-				break;
+					break;
+				default:
+					case MotionEvent.ACTION_UP:
+						release(event);
+						break;
 			}
 		}
 	}
